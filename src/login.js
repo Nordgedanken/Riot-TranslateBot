@@ -10,17 +10,17 @@ export default class Client {
         return this.login();
     };
 
-    login = async () => {
-        if (await fs.exists('user_data.json')){
+    login = () => {
+        if (node_fs.existsSync('user_data.json')){
             const json = node_fs.readFileSync('user_data.json');
             const valid_json = JSON.parse(json);
             if (valid_json.hasOwnProperty("access_token")){
                 return this.useToken(valid_json["access_token"], valid_json["user_id"], valid_json["home_server"]);
             } else {
-                this.useEnv();
+                return this.useEnv();
             }
         } else {
-            this.useEnv();
+            return this.useEnv();
         }
     };
 
@@ -30,17 +30,19 @@ export default class Client {
             userId: env_args[0]
         });
 
-        matrixClient.loginWithPassword(env_args[0], env_args[1]).done( data => {
+        matrixClient.loginWithPassword(env_args[0], env_args[1]).then( data => {
             console.log(data);
             fs.writeFile('user_data.json', JSON.stringify(data), 'utf8')
-                .then(() => {
-                    console.log("saved Access_token to file")
-                })
-                .catch(err => {
-                    console.error(err);
-                });
+            .then(() => {
+                console.log("saved Access_token to file");
+            })
+            .catch(err => {
+                console.error(err);
+            })
         });
-        return this.login();
+        return new Promise(resolve => {
+            resolve(matrixClient);
+        });
     };
 
     useToken = (token, userId, baseUrl) => {
@@ -51,6 +53,6 @@ export default class Client {
         });
         return new Promise(resolve => {
             resolve(matrixClient);
-        })
+        });
     };
 }
