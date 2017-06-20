@@ -1,4 +1,6 @@
 import Weblate from './weblate';
+import config from '../config.json';
+
 export default class Commands {
     constructor(client){
         this.client = client;
@@ -20,5 +22,19 @@ export default class Commands {
         .catch(err => {
             console.log(err);
         });
+    };
+
+    projects = room => {
+        return this.weblate.getProjects().then(body => {
+            let message = 'Projects on the Server:\n';
+            for (let key in body['results']) {
+                message += body['results'][key]["name"] + '\n'
+                message += 'Direct Link: '+ config["weblateApiRoot"].replace('api/', 'projects/') + body['results'][key]["slug"] + '\n'
+            }
+            return this.client.sendNotice(room.roomId, message).catch(error => console.log(error));
+        })
+            .catch(err => {
+                console.log(err);
+            });
     };
 }

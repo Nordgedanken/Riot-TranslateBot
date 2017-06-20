@@ -13,11 +13,6 @@ mx.getClient().then(client => {
         if (event.getSender() === "@MTRNord:matrix.org") return;
         if (room.roomId !== "!EDuQpgunAOTYiUKIcU:matrix.org" && room.roomId !== "!OYyXUbcTKVsDBUniNn:matrix.eclabs.de") return;
         const message = "" + event.getContent().body;
-        /*console.log(
-            // the room name will update with m.room.name events automatically
-            "(%s) %s :: %s", room.name, event.getSender(), message
-        );
-        client.sendHtmlNotice(room.roomId, message, message).catch(error => console.log(error));*/
         if (message.startsWith("!help")){
             console.log(
                 "(%s) %s :: %s", room.name, event.getSender(), message
@@ -28,6 +23,11 @@ mx.getClient().then(client => {
                 "(%s) %s :: %s", room.name, event.getSender(), message
             );
             commands.languages(room);
+        } else if (message.startsWith("!projects")){
+            console.log(
+                "(%s) %s :: %s", room.name, event.getSender(), message
+            );
+            commands.projects(room);
         }
     });
     client.startClient();
