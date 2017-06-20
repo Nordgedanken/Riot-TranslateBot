@@ -23,8 +23,7 @@ mx.getClient().then(client => {
                 "(%s) %s :: %s", room.name, event.getSender(), message
             );
             commands.help(room);
-        }
-        if (message.startsWith("!languages")){
+        } else if (message.startsWith("!languages")){
             console.log(
                 "(%s) %s :: %s", room.name, event.getSender(), message
             );

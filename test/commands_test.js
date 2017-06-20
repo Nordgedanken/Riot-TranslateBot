@@ -16,5 +16,11 @@ describe('Commands', () => {
             const help = CommandHandler.help(room);
             help.should.be.fulfilled.and.notify(done);
         });
+        it('should send languages', done => {
+            const CommandHandler = new Commands(client);
+            const room = {roomId: '!EDuQpgunAOTYiUKIcU:matrix.org'};
+            const languages = CommandHandler.languages(room);
+            languages.should.be.fulfilled.and.notify(done);
+        });
     });
 });

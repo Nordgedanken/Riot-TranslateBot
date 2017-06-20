@@ -6,11 +6,11 @@ export default class Commands {
     }
 
     help = room => {
-        return this.client.sendHtmlNotice(room.roomId, `Help for you!\n Commands:\n * !language`, `Help for you!<br> Commands:<br> <ul><li>None</li></ul>`).catch(error => console.log(error));
+        return this.client.sendHtmlNotice(room.roomId, `Help for you!\n Commands:\n * !languages`, `Help for you!<br> Commands:<br> <ul><li>languages</li></ul>`).catch(error => console.log(error));
     };
 
     languages = room => {
-    this.weblate.getLangs().then(body => {
+        return this.weblate.getLangs().then(body => {
             let message = 'Currently known languages:\n';
             for (let key in body['results']) {
                 message += body['results'][key]['code'] + '\n'
