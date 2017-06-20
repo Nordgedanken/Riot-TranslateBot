@@ -2,7 +2,7 @@ import matrix_sdk from 'matrix-js-sdk';
 import fs from 'mz/fs';
 import node_fs from 'fs';
 
-const env_args = process.argv.splice(process.execArgv.length + 2);
+import config from '../config.json';
 
 export default class Login {
     constructor() {};
@@ -17,20 +17,20 @@ export default class Login {
             if (valid_json.hasOwnProperty("access_token")){
                 return this.useToken(valid_json["access_token"], valid_json["user_id"], valid_json["home_server"]);
             } else {
-                return this.useEnv();
+                return this.usePassword();
             }
         } else {
-            return this.useEnv();
+            return this.usePassword();
         }
     };
 
-    useEnv = () => {
+    usePassword = () => {
         const matrixClient = matrix_sdk.createClient({
             baseUrl: "https://matrix.org",
-            userId: env_args[0]
+            userId: config["username"]
         });
 
-        matrixClient.loginWithPassword(env_args[0], env_args[1]).then( data => {
+        matrixClient.loginWithPassword(config["username"], config["password"]).then( data => {
             console.log(data);
             fs.writeFile('user_data.json', JSON.stringify(data), 'utf8')
             .then(() => {

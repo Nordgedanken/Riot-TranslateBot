@@ -61,3 +61,4 @@ typings/
 lib/
 package-lock.json
 user_data.json
+config.json

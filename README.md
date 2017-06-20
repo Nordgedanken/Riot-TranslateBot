@@ -4,10 +4,8 @@
 A simple riot bot which provides Status about Weblate
 
 # Tests
+First make sure you fill a ``config.json`` like the config.example.json.
 ```
 1. npm install
-2. npm run start "USERNAME" "PASSWORD"
-3. kill npm run start after it got the poll rules
-4. npm test
+2. npm test
 ```
-``npm run start`` is required as it generates the needed token file. Using "USERNAME" and "PASSWORD" on npm test will propably work too.
