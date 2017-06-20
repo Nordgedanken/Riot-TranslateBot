@@ -1,6 +1,6 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import login from '../lib/login';
+import Login from '../lib/login';
 import chai_fs from 'chai-fs';
 
 chai.use(chai_fs);
@@ -11,7 +11,7 @@ const expect = chai.expect;
 chai.should();
 
 describe('Login', () => {
-    const mx = new login;
+    const mx = new Login;
     it('should eventually login', done => {
         const client = mx.getClient();
         client.should.be.fulfilled.and.notify(done);

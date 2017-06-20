@@ -4,7 +4,7 @@ import node_fs from 'fs';
 
 const env_args = process.argv.splice(process.execArgv.length + 2);
 
-export default class Client {
+export default class Login {
     constructor() {};
     getClient = () => {
         return this.login();
