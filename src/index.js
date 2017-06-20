@@ -18,11 +18,17 @@ mx.getClient().then(client => {
             "(%s) %s :: %s", room.name, event.getSender(), message
         );
         client.sendHtmlNotice(room.roomId, message, message).catch(error => console.log(error));*/
-        if (message.includes("!help")){
+        if (message.startsWith("!help")){
             console.log(
                 "(%s) %s :: %s", room.name, event.getSender(), message
             );
             commands.help(room);
+        }
+        if (message.startsWith("!languages")){
+            console.log(
+                "(%s) %s :: %s", room.name, event.getSender(), message
+            );
+            commands.languages(room);
         }
     });
     client.startClient();
