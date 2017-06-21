@@ -33,8 +33,12 @@ export default class Commands {
             }
             return this.client.sendNotice(room.roomId, message).catch(error => console.log(error));
         })
-            .catch(err => {
-                console.log(err);
-            });
+        .catch(err => {
+            console.log(err);
+        });
     };
+
+    status = (room, lang) => {
+        return undefined;
+    }
 }

@@ -15,19 +15,29 @@ mx.getClient().then(client => {
         const message = "" + event.getContent().body;
         if (message.startsWith("!help")){
             console.log(
-                "(%s) %s :: %s", room.name, event.getSender(), message
+                "\r\n(%s) %s :: %s\r\n", room.name, event.getSender(), message
             );
             commands.help(room);
         } else if (message.startsWith("!languages")){
             console.log(
-                "(%s) %s :: %s", room.name, event.getSender(), message
+                "\r\n(%s) %s :: %s\r\n", room.name, event.getSender(), message
             );
             commands.languages(room);
         } else if (message.startsWith("!projects")){
             console.log(
-                "(%s) %s :: %s", room.name, event.getSender(), message
+                "\r\n(%s) %s :: %s\r\n", room.name, event.getSender(), message
             );
             commands.projects(room);
+        } else if (message.startsWith("!status")){
+            const message_split = message.split(" ");
+            let lang;
+            if (message_split.length > 1){
+                lang = message_split[1];
+            }
+            console.log(
+                "\r\n(%s) %s :: %s\r\n", room.name, event.getSender(), message
+            );
+            commands.status(room, lang);
         }
     });
     client.startClient();
